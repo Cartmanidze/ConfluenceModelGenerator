@@ -4,5 +4,5 @@ public class Metadata
 {
     public List<DescriptionMetadata> Descriptions { get; } = new();
 
-    public Dictionary<string, object> Values { get; } = new();
+    public Dictionary<string, string> Values { get; } = new();
 }

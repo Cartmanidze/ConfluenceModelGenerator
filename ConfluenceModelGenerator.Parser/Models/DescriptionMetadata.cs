@@ -1,26 +1,12 @@
-﻿using System.Text.Json.Serialization;
-
-namespace ConfluenceModelGenerator.Parser.Models;
+﻿namespace ConfluenceModelGenerator.Parser.Models;
 
 public class DescriptionMetadata
 {
-    public DescriptionMetadata(string name, string type, bool isRequired, string description)
-    {
-        Name = name;
-        Type = type;
-        IsRequired = isRequired;
-        Description = description;
-    }
+    public string Name { get; set; }
     
-    [JsonInclude]
-    public string Name { get; private set; }
-
-    [JsonInclude]
-    public string Type { get; private set; }
-
-    [JsonInclude]
-    public bool IsRequired { get; private set; }
-
-    [JsonInclude]
-    public string Description { get; private set; }
+    public string Type { get; set; }
+    
+    public bool IsRequired { get; set; }
+    
+    public string Description { get; set; }
 }
