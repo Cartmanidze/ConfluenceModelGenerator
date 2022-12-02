@@ -1,13 +1,14 @@
-﻿
-using AngleSharp;
+﻿using AngleSharp;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
+using ConfluenceModelGenerator.Parser.Models;
+using ConfluenceModelGenerator.Parser.Services.Interfaces;
 
-namespace ConfluenceModelGenerator.Parser;
+namespace ConfluenceModelGenerator.Parser.Services;
 
-public class Parser
+public class MetadataParser : IMetadataParser
 {
-    public async Task ParseAsync(CancellationToken token)
+    public async Task<Metadata> ParseAsync(DataForParse dataForParse, CancellationToken token)
     {
         const string url = "https://docs.reo.ru/pages/viewpage.action?pageId=45255786";
 
@@ -15,7 +16,7 @@ public class Parser
         
         var context = BrowsingContext.New(config);
 
-        await SubmitAsync(context, token);
+        await SubmitAsync(context, dataForParse, token);
         
         var document = await context.OpenAsync(url, token);
         
@@ -30,9 +31,11 @@ public class Parser
                 var localCell = cell;
             }
         }
-    }
 
-    private async Task SubmitAsync(IBrowsingContext context, CancellationToken token)
+        return new Metadata();
+    }
+    
+    private static async Task SubmitAsync(IBrowsingContext context, DataForParse dataForParse, CancellationToken token)
     {
         var document = await context.OpenAsync("https://docs.reo.ru/login.action", token);
         
