@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfluenceModelGenerator", "ConfluenceModelGenerator\ConfluenceModelGenerator.csproj", "{F23119D1-52EB-4C7E-8284-09ABC01F75A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfluenceModelGenerator.SourceGenerator", "ConfluenceModelGenerator.SourceGenerator\ConfluenceModelGenerator.SourceGenerator.csproj", "{9111B3C8-0CAF-4B80-A8A2-88F3FE762D19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfluenceModelGenerator.Parser", "ConfluenceModelGenerator.Parser\ConfluenceModelGenerator.Parser.csproj", "{868012F8-E841-4969-87A4-84D5784B92D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfluenceModelGenerator.Parser.Tests", "ConfluenceModelGenerator.Parser.Tests\ConfluenceModelGenerator.Parser.Tests.csproj", "{BE246DFE-C1A6-4758-9B2E-E42350215828}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F23119D1-52EB-4C7E-8284-09ABC01F75A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F23119D1-52EB-4C7E-8284-09ABC01F75A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F23119D1-52EB-4C7E-8284-09ABC01F75A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F23119D1-52EB-4C7E-8284-09ABC01F75A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9111B3C8-0CAF-4B80-A8A2-88F3FE762D19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9111B3C8-0CAF-4B80-A8A2-88F3FE762D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9111B3C8-0CAF-4B80-A8A2-88F3FE762D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9111B3C8-0CAF-4B80-A8A2-88F3FE762D19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{868012F8-E841-4969-87A4-84D5784B92D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{868012F8-E841-4969-87A4-84D5784B92D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{868012F8-E841-4969-87A4-84D5784B92D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{868012F8-E841-4969-87A4-84D5784B92D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE246DFE-C1A6-4758-9B2E-E42350215828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE246DFE-C1A6-4758-9B2E-E42350215828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE246DFE-C1A6-4758-9B2E-E42350215828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE246DFE-C1A6-4758-9B2E-E42350215828}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
