@@ -66,6 +66,8 @@ public class MetadataParser : IMetadataParser
 
     private static void InnerGetValues(IParentNode document, string tableSelector, Metadata metadata)
     {
+        var metadataItems = new List<Metadata>();
+        
         var table = document.QuerySelector<IHtmlTableSectionElement>(tableSelector);
 
         var isHeader = true;
@@ -108,6 +110,6 @@ public class MetadataParser : IMetadataParser
         
         var form = document.QuerySelector<IHtmlFormElement>("#login-container > div > form");
         
-        var resultDocument = await form!.SubmitAsync(new { os_username = "bezrukov_g", os_password = "Yf,tht;yfz12" });
+        var resultDocument = await form!.SubmitAsync(new { os_username = "user", os_password = "pass" });
     }
 }

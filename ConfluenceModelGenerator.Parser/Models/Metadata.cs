@@ -2,7 +2,13 @@
 
 public class Metadata
 {
-    public List<DescriptionMetadata> Descriptions { get; } = new();
+    public string Name { get; set; }
+    
+    public string Type { get; set; }
+    
+    public bool IsRequired { get; set; }
+    
+    public string Description { get; set; }
 
-    public Dictionary<string, string> Values { get; } = new();
+    public string Value { get; set; }
 }
