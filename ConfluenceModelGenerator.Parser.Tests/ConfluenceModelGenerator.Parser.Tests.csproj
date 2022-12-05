@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ConfluenceModelGenerator.Parser\ConfluenceModelGenerator.Parser.csproj" />
+      <ProjectReference Include="..\ConfluenceModelGenerator.Application\ConfluenceModelGenerator.Application.csproj" />
     </ItemGroup>
 
 </Project>

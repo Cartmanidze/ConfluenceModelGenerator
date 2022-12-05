@@ -1,6 +1,6 @@
-﻿namespace ConfluenceModelGenerator.Parser.Models;
+﻿namespace ConfluenceModelGenerator.Application.Models;
 
-public class Metadata
+public class EntityMetadata : IMetadata
 {
     public string Name { get; set; }
     
@@ -9,6 +9,4 @@ public class Metadata
     public bool IsRequired { get; set; }
     
     public string Description { get; set; }
-
-    public string Value { get; set; }
 }

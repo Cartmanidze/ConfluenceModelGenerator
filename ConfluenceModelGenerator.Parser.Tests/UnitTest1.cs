@@ -8,7 +8,7 @@ public class ParserTests
     [Fact]
     public async Task Parser_test()
     {
-        var parser = new MetadataParser();
+        var parser = new EntityMetadataParser();
         
         await parser.ParseAsync(new DataForParse(null, null, null, null, null), CancellationToken.None);
     }

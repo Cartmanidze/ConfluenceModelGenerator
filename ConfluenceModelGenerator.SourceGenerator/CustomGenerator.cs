@@ -14,12 +14,9 @@ public class CustomGenerator : ISourceGenerator
         context.AddSource("myGeneratedFile.cs", SourceText.From(@"
 namespace GeneratedNamespace
 {
-    public class GeneratedClass
+    public enum TechnologyTypes
     {
-        public static void GeneratedMethod()
-        {
-            // generated code
-        }
+        
     }
 }", Encoding.UTF8));
     }
