@@ -4,21 +4,21 @@ namespace ConfluenceModelGenerator.Parser.Extensions;
 
 internal static class DescriptionMetadataExtensions
 {
-    internal static DescriptionMetadata SetValue(this DescriptionMetadata descriptionMetadata, string key, string value)
+    internal static Metadata SetValue(this Metadata metadata, string key, string value)
     {
         switch (key)
         {
             case "Наименование атрибута":
-                descriptionMetadata.Name = value;
+                metadata.Name = value;
                 break;
             case "Тип":
-                descriptionMetadata.Type = value;
+                metadata.Type = value;
                 break;
             case "Обязательный":
-                descriptionMetadata.IsRequired = value == "Да";
+                metadata.IsRequired = value == "Да";
                 break;
             case "Описание атрибута":
-                descriptionMetadata.Description = value;
+                metadata.Description = value;
                 break;
         }
 

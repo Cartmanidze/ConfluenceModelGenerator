@@ -4,5 +4,5 @@ namespace ConfluenceModelGenerator.Parser.Services.Interfaces;
 
 public interface IMetadataParser
 {
-    Task<Metadata> ParseAsync(DataForParse dataForParse, CancellationToken token);
+    Task<List<Metadata>> ParseAsync(DataForParse dataForParse, CancellationToken token);
 }

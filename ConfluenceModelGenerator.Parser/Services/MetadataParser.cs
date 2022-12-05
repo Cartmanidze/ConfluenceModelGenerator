@@ -1,6 +1,7 @@
 ﻿using AngleSharp;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
+using ConfluenceModelGenerator.Parser.Extensions;
 using ConfluenceModelGenerator.Parser.Models;
 using ConfluenceModelGenerator.Parser.Services.Interfaces;
 
@@ -8,7 +9,7 @@ namespace ConfluenceModelGenerator.Parser.Services;
 
 public class MetadataParser : IMetadataParser
 {
-    public async Task<Metadata> ParseAsync(DataForParse dataForParse, CancellationToken token)
+    public async Task<List<Metadata>> ParseAsync(DataForParse dataForParse, CancellationToken token)
     {
         const string url = "https://docs.reo.ru/pages/viewpage.action?pageId=45255786";
 
@@ -19,18 +20,22 @@ public class MetadataParser : IMetadataParser
         await InnerSubmitAsync(context, dataForParse, token);
         
         var document = await context.OpenAsync(url, token);
-        
-        var tableSelector = "#main-content > div:nth-child(5) > table > tbody";
-        
-        var metadata = new Metadata();
-        
-        InnerGetValues(document, tableSelector, metadata);
 
-        return new Metadata();
+        var descriptionSelector = "#main-content > div:nth-child(3) > table";
+
+        var metadataItems = InnerGetDescriptions(document, descriptionSelector);
+
+        var tableSelector = "#main-content > div:nth-child(5) > table > tbody";
+
+        InnerGetValues(document, tableSelector, metadataItems);
+
+        return metadataItems;
     }
     
-    private static void InnerGetDescriptions(IParentNode document, string descriptionSelector, Metadata metadata)
+    private static List<Metadata> InnerGetDescriptions(IParentNode document, string descriptionSelector)
     {
+        var metadataItems = new List<Metadata>();
+        
         var table = document.QuerySelector<IHtmlTableSectionElement>(descriptionSelector)!;
 
         var isHeader = true;
@@ -41,6 +46,8 @@ public class MetadataParser : IMetadataParser
 
         foreach (var row in table.Rows)
         {
+            var metadata = new Metadata();
+            
             foreach (var cell in row.Cells)
             {
                 if (isHeader)
@@ -50,6 +57,8 @@ public class MetadataParser : IMetadataParser
                 else
                 {
                     var key = keysByNumbers[count];
+
+                    metadata.SetValue(key, row.TextContent);
                 }
 
                 count++;
@@ -59,15 +68,19 @@ public class MetadataParser : IMetadataParser
             {
                 isHeader = false;
             }
+            else
+            {
+                metadataItems.Add(metadata);
+            }
 
             count = 0;
         }
+
+        return metadataItems;
     }
 
-    private static void InnerGetValues(IParentNode document, string tableSelector, Metadata metadata)
+    private static void InnerGetValues(IParentNode document, string tableSelector, List<Metadata> metadataItems)
     {
-        var metadataItems = new List<Metadata>();
-        
         var table = document.QuerySelector<IHtmlTableSectionElement>(tableSelector);
 
         var isHeader = true;
@@ -82,13 +95,13 @@ public class MetadataParser : IMetadataParser
             {
                 if (isHeader)
                 {
-                    metadata.Values.Add(cell.TextContent, null);
-                    
                     keys[count] = cell.TextContent;
                 }
                 else
                 {
-                    metadata.Values[keys[count]] = cell.TextContent;
+                    var metadata = metadataItems.First(x => x.Name == keys[count]);
+                    
+                    metadata.Value = cell.TextContent;
                 }
 
                 count++;
@@ -110,6 +123,6 @@ public class MetadataParser : IMetadataParser
         
         var form = document.QuerySelector<IHtmlFormElement>("#login-container > div > form");
         
-        var resultDocument = await form!.SubmitAsync(new { os_username = "user", os_password = "pass" });
+        await form!.SubmitAsync(new { os_username = "user", os_password = "pass" });
     }
 }
