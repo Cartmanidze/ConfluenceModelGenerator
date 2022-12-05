@@ -30,7 +30,7 @@ public class Translator : ITranslator
         {
             var translation = jsonResponse.Translation[0];
             
-            foreach (var translationPart in translation.Split(' ', '-', ')', '('))
+            foreach (var translationPart in translation.Split(' ', '-', ')', '(', ';', ':', '.'))
             {
                 if (!string.IsNullOrWhiteSpace(translationPart))
                 {

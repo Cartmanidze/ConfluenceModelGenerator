@@ -37,6 +37,6 @@ public abstract class MetadataParserBase<TMetadata> : IMetadataParser<TMetadata>
             return;
         }
         
-        await form!.SubmitAsync(new { os_username = dataForParse.Login, os_password = dataForParse.Password });
+        var doc = await form!.SubmitAsync(new { os_username = dataForParse.Login, os_password = dataForParse.Password });
     }
 }
