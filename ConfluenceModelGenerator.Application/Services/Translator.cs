@@ -1,4 +1,7 @@
-﻿using ConfluenceModelGenerator.Application.Services.Interfaces;
+﻿using System.Text;
+using ConfluenceModelGenerator.Application.Extensions;
+using ConfluenceModelGenerator.Application.Models;
+using ConfluenceModelGenerator.Application.Services.Interfaces;
 using Flurl;
 using Flurl.Http;
 
@@ -8,19 +11,34 @@ public class Translator : ITranslator
 {
     public async Task<string> TranslateAsync(string value, CancellationToken token)
     {
-        var url = new Url("https://libretranslate.com/translate");
+        var url = new Url("https://api.reverso.net/translate/v1/translation");
 
         var response = await url.PostJsonAsync(new
         {
-            q = value,
-            source = "en",
-            target = "ru",
             format = "text",
-            api_key = ""
+            from = "rus",
+            input = value,
+            options = new {sentenceSplitter = true, origin =  "translation.web", contextResults =  true, languageDetection = true },
+            to = "eng"
         }, token);
 
-        var result = await response.GetStringAsync();
+        var jsonResponse = await response.GetJsonAsync<TranslateResult>();
 
-        return result;
+        var result = new StringBuilder();
+
+        if (jsonResponse.Translation.Length > 0)
+        {
+            var translation = jsonResponse.Translation[0];
+            
+            foreach (var translationPart in translation.Split(' ', '-', ')', '('))
+            {
+                if (!string.IsNullOrWhiteSpace(translationPart))
+                {
+                    result.Append(translationPart.FirstCharToUpper().Trim()); 
+                }
+            }
+        }
+
+        return result.ToString();
     }
 }

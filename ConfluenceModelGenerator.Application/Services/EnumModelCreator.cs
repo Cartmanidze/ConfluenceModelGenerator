@@ -12,7 +12,7 @@ public class EnumModelCreator : IModelCreator
 
         var dataForParse = new DataForParse("https://docs.reo.ru/pages/viewpage.action?pageId=45255786",
             "https://docs.reo.ru/login.action", "#login-container > div > form",
-            "#main-content > div:nth-child(3) > table", "login", "pass");
+            "#main-content > div:nth-child(5) > table", "user", "pass");
 
         var metadataItems = await parser.ParseAsync(dataForParse, token);
 
@@ -29,13 +29,15 @@ namespace GeneratedNamespace
     {
         
 ");
-        var count = 1;
-        
-        foreach (var metadataItem in metadataItems.Where(x => x.Name == "Name"))
-        {
-            sb.AppendLine($"{metadataItem.Value} = {count},");
 
-            count++;
+        foreach (var metadataItem in metadataItems)
+        {
+            sb.AppendLine(@$"	/// <summary>
+            /// {metadataItem.Description}
+            /// </summary>");
+            
+            sb.AppendLine($"{metadataItem.Name} = {metadataItem.Value},");
+            
         }
         
         

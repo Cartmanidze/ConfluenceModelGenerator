@@ -3,4 +3,7 @@
 using ConfluenceModelGenerator.Application.Services;
 
 Console.WriteLine("Start!");
+
+new EnumModelCreator().CreateAsync(null, CancellationToken.None).GetAwaiter().GetResult();
+
 Console.WriteLine("End!");

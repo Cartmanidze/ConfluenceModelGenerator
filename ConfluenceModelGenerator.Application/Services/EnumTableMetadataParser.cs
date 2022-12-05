@@ -38,17 +38,15 @@ public class EnumTableMetadataParser : MetadataParserBase<EnumMetadata>
                     }
                     else if (keys[count] == "Name")
                     {
-                        metadata.Name = cell.TextContent;
+                        metadata.Name = await translator.TranslateAsync(cell.TextContent, token);
 
-                        metadata.Description = await translator.TranslateAsync(cell.TextContent, token);
+                        metadata.Description = cell.TextContent;
                     }
                     else
                     {
                         continue;
                     }
 
-                    result.Add(metadata);
-                    
                     count++;
                 }
             }
@@ -56,6 +54,10 @@ public class EnumTableMetadataParser : MetadataParserBase<EnumMetadata>
             if (isHeader)
             {
                 isHeader = false;
+            }
+            else
+            {
+                result.Add(metadata);
             }
 
             count = 0;
